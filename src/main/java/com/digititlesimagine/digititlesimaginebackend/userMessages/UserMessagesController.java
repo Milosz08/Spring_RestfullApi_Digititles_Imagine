@@ -18,18 +18,48 @@
 
 package com.digititlesimagine.digititlesimaginebackend.userMessages;
 
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.http.*;
+import org.springframework.validation.annotation.*;
 import org.springframework.web.bind.annotation.*;
 
-import static com.digititlesimagine.digititlesimaginebackend.utils.ServletConfigurer.APP_PREFIX;
+import java.util.*;
+
+import static com.digititlesimagine.digititlesimaginebackend.utils.ServletConfigurer.*;
 
 @RestController
-@RequestMapping(APP_PREFIX)
+@RequestMapping(APP_PREFIX + USER_MESSAGES)
 @CrossOrigin
 public class UserMessagesController {
 
+    @Autowired
+    private UserMessagesService userMessagesService;
+
     @GetMapping
-    public String validateTestEndpoint() {
-        return "Hello Web";
+    public ResponseEntity<List<UserMessagesModel>> getAllUserMessages() {
+        return new ResponseEntity<>(userMessagesService.getAllUserMessages(), HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<UserMessagesModel> addUserMessage(@Validated @RequestBody UserMessagesModel userMessagesModel) {
+        return new ResponseEntity<>(userMessagesService.addUserMessage(userMessagesModel), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    ResponseEntity<UserMessageUpdatable> updateUserMessageStatus(@PathVariable String id) {
+        return new ResponseEntity<>(userMessagesService.updateUserMessageStatus(id), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    ResponseEntity<Void> deleteSingleUserMessage(@PathVariable String id) {
+        userMessagesService.deleteSingleUserMessageById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @DeleteMapping
+    ResponseEntity<Void> deleteAllUserMessages() {
+        userMessagesService.deleteAllUserMessages();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

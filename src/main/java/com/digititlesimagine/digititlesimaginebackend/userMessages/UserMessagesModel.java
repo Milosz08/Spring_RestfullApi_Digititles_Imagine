@@ -19,9 +19,52 @@
 package com.digititlesimagine.digititlesimaginebackend.userMessages;
 
 import com.digititlesimagine.digititlesimaginebackend.utils.*;
+import com.fasterxml.jackson.annotation.*;
 
+import lombok.*;
+
+import org.hibernate.annotations.*;
+
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.validation.constraints.*;
+
+@Data
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@Table(name = "user_messages")
 public class UserMessagesModel extends AuditModel {
 
+    @Id
+    @GenericGenerator(
+        name = "user_messages_id",
+        strategy = "com.digititlesimagine.digititlesimaginebackend.utils.CustomIdGenerator"
+    )
+    @GeneratedValue(generator = "user_messages_id")
+    @Column(name = "user_messages_id")
+    private String id;
 
+    @Column(name = "user_name")
+    @NotNull(message = "Blank field responsible for user name property")
+    @Size(min = 3, max = 30, message = "Field responsible for user name should have from 3 to 30 characters")
+    private String userName;
+
+    @Column(name = "user_lastname")
+    private String userLastname = "";
+
+    @Column(name = "user_email")
+    @NotEmpty(message = "Blank/empty field responsible for user email property")
+    private String userEmail;
+
+    @Column(name = "if_viewed")
+    private boolean ifViewed = false;
+
+    @Column(name = "user_message")
+    @NotNull(message = "Blank field responsible for user message property")
+    @Size(min = 10, max = 300, message = "Field responsible for user message should have from 10 to 300 characters")
+    private String userMessage;
 
 }
