@@ -16,7 +16,7 @@
  * COPIES OR SUBSTANTIAL PORTIONS OF THE SOFTWARE.
  */
 
-package com.digititlesimagine.digititlesimaginebackend.utils.jwt;
+package com.digititlesimagine.digititlesimaginebackend.jwt;
 
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.*;

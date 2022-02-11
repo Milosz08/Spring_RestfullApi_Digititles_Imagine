@@ -18,7 +18,7 @@
 
 package com.digititlesimagine.digititlesimaginebackend;
 
-import com.digititlesimagine.digititlesimaginebackend.utils.jwt.*;
+import com.digititlesimagine.digititlesimaginebackend.jwt.*;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.context.annotation.*;
@@ -33,8 +33,12 @@ import org.springframework.security.web.authentication.*;
 
 import javax.servlet.*;
 
+import static com.digititlesimagine.digititlesimaginebackend.utils.ServletConfigurer.*;
+
 @EnableWebSecurity
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
+
+    private static final String USER_MESSAGES_PATTERN = APP_PREFIX + USER_MESSAGES + "/**";
 
     @Autowired
     private DbUserDetailsService dbUserDetailsService;
@@ -61,8 +65,10 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/**").permitAll()
-                .anyRequest().authenticated()
+                //.antMatchers(HttpMethod.POST, USER_MESSAGES_PATTERN).permitAll()
+                //.antMatchers(HttpMethod.GET, "/**").permitAll()
+                //.anyRequest().authenticated()
+                .anyRequest().permitAll()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
