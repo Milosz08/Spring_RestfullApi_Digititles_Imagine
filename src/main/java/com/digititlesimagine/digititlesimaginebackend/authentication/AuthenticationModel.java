@@ -45,14 +45,17 @@ public class AuthenticationModel extends AuditModel {
     private String id;
 
     @Column(name = "cms_username")
+    @NotNull(message = "Blank field responsible for username property")
     @Size(min = 8, max = 500, message = "Field responsible for cms username should have at least 8 characters")
     private String username;
 
     @Column(name = "cms_password")
+    @NotNull(message = "Blank field responsible for password property")
     @Size(min = 8, max = 500, message = "Field responsible for cms password should have at least 8 characters")
     private String password;
 
     @Column(name = "cms_token")
+    @NotNull(message = "Blank field responsible for token property")
     @Size(min = 8, max = 500, message = "Field responsible for cms token should have at least 8 characters")
     private String token;
 
