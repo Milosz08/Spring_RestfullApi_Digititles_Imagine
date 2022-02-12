@@ -44,7 +44,7 @@ public class AuditModel implements Serializable {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated_at", nullable = false)
-    @CreatedDate
+    @LastModifiedDate
     @JsonIgnore
     private Date updatedAt;
 
