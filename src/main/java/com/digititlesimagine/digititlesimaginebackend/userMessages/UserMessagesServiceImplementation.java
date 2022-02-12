@@ -38,7 +38,7 @@ public class UserMessagesServiceImplementation implements UserMessagesService {
 
     @Override
     public UserMessagesModel addUserMessage(UserMessagesModel userMessagesModel) {
-        String emailField = userMessagesModel.getUserEmail();
+        String emailField = userMessagesModel.getEmail();
         if (!emailField.contains("@")) {
             throw new ApiRequestException("Email address is not valid!", HttpStatus.BAD_REQUEST);
         }
