@@ -50,14 +50,14 @@ public class UserMessagesModel extends AuditModel {
     @Column(name = "user_name")
     @NotNull(message = "Blank field responsible for user name property")
     @Size(min = 3, max = 30, message = "Field responsible for user name should have from 3 to 30 characters")
-    private String userName;
+    private String username;
 
     @Column(name = "user_lastname")
-    private String userLastname = "";
+    private String lastname = "";
 
     @Column(name = "user_email")
     @NotEmpty(message = "Blank/empty field responsible for user email property")
-    private String userEmail;
+    private String email;
 
     @Column(name = "if_viewed")
     private boolean ifViewed = false;
@@ -65,6 +65,6 @@ public class UserMessagesModel extends AuditModel {
     @Column(name = "user_message")
     @NotNull(message = "Blank field responsible for user message property")
     @Size(min = 10, max = 300, message = "Field responsible for user message should have from 10 to 300 characters")
-    private String userMessage;
+    private String message;
 
 }
