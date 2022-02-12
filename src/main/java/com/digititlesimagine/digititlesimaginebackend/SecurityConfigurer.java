@@ -39,6 +39,7 @@ import static com.digititlesimagine.digititlesimaginebackend.utils.ServletConfig
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     private static final String USER_MESSAGES_PATTERN = APP_PREFIX + USER_MESSAGES + "/**";
+    private static final String LOGIN_PATTERN = APP_PREFIX + AUTHENTICATIONS + "/validate/**";
 
     @Autowired
     private DbUserDetailsService dbUserDetailsService;
@@ -65,10 +66,10 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
                 .authorizeRequests()
-                //.antMatchers(HttpMethod.POST, USER_MESSAGES_PATTERN).permitAll()
-                //.antMatchers(HttpMethod.GET, "/**").permitAll()
-                //.anyRequest().authenticated()
-                .anyRequest().permitAll()
+                .antMatchers(HttpMethod.POST, USER_MESSAGES_PATTERN).permitAll()
+                .antMatchers(HttpMethod.GET, "/**").permitAll()
+                .antMatchers(HttpMethod.POST, LOGIN_PATTERN).permitAll()
+                .anyRequest().authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
