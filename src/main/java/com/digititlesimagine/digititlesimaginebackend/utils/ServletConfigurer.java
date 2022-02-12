@@ -23,5 +23,6 @@ public class ServletConfigurer {
     public static final String APP_PREFIX = "/javabean/app/";
 
     public static final String USER_MESSAGES = "user-messages";
+    public static final String AUTHENTICATIONS = "authentications";
 
 }
