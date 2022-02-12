@@ -1,0 +1,46 @@
+Backend Java API for Digititles Imagine website (in NextJS):
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Endpoints already implemented:
+    - user messages (footer form)
+    - full authnetication and JWT generated after successed login
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+User messages JSON template:
+{
+    username: string (from 3 to 30 chars);
+    lastname: string (not required);
+    email: string;
+    message: string (from 10 to 300 chars);
+}
+
+User messages PUT response (without body, only **/{id}):
+{
+    id: string;
+    status: boolean;
+}
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Authentication JSON template:
+{
+    username: string;
+    password: string;
+    token: string;
+    role: enum (UNDEFINED, MODERATOR, ADMINISTRATOR);
+}
+
+Authentication validate POST method JSON return value (**/authentications/validate):
+{
+    status: string;
+    bearerToken: string; (if failed, then empty string)
+    authLevel: enum (UNDEFINED, MODERATOR, ADMINISTRATOR);
+    errors: { (when true, then error)
+        username: boolean;
+        password: boolean;
+        token: boolean;
+    };
+    servletTime: long (in miliseconds);
+}
