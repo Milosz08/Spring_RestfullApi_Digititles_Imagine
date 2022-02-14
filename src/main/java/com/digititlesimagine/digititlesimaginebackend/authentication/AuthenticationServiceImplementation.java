@@ -76,13 +76,13 @@ public class AuthenticationServiceImplementation implements AuthenticationServic
     public ResponseEntity<AuthenticationResponse> validateCredentials(AuthenticationModel model) {
         String name = model.getUsername();
         Optional<AuthenticationModel> findByUsername = authenticationRepository.findAuthenticationModelByUsername(name);
-        if(findByUsername.isPresent()) {
+        if (findByUsername.isPresent()) {
             AuthenticationModel foundModel = findByUsername.get();
             Enums.Authentications role = foundModel.getRole();
             List<Boolean> valid = validateAllFields(model, findByUsername.get());
-            if(valid.stream().allMatch(item -> item)) {
+            if (valid.stream().allMatch(item -> item)) {
                 String bearer = "";
-                if(role != Enums.Authentications.UNDEFINED) {
+                if (role != Enums.Authentications.UNDEFINED) {
                     UserDetails userDetails = dbUserDetailsService.loadUserByUsername(model.getUsername());
                     bearer = jwtUtil.generateToken(userDetails);
                     return new ResponseEntity<>(
@@ -94,8 +94,9 @@ public class AuthenticationServiceImplementation implements AuthenticationServic
                 new AuthenticationResponse("Not authorised", null, role, valid), HttpStatus.FORBIDDEN
             );
         }
+        List<Boolean> allFalse = Arrays.asList(false, false, false);
         return new ResponseEntity<>(
-            new AuthenticationResponse("User not found", null, null, Arrays.asList(false, false, false)),
+            new AuthenticationResponse("User not found", null, null, allFalse),
             HttpStatus.NOT_FOUND
         );
     }
