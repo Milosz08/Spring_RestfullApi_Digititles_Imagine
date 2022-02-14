@@ -19,19 +19,19 @@
 package com.digititlesimagine.digititlesimaginebackend.utils;
 
 import com.fasterxml.jackson.annotation.*;
+
 import lombok.*;
+
 import org.springframework.data.annotation.*;
 import org.springframework.data.jpa.domain.support.*;
 
 import javax.persistence.*;
+
 import java.io.*;
 import java.util.*;
 
-@Getter
-@Setter
+@Data
 @ToString
-@AllArgsConstructor
-@NoArgsConstructor
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public class AuditModel implements Serializable {
