@@ -1,0 +1,69 @@
+{                                               relation:
+    title: (string)
+    aboutSection: (string[])                    many to one
+    productionSection: (string[])               many to one
+    projectTypos: object("project_typos")       one to one
+    projectRender: object("project_render")     one to one
+    projectColours: object("project_colours")   one to one
+}
+
+
+table "project_general":
+    primary_key: varchar(20)
+    title: varchar(100)
+    embed_code: varchar(200)
+    prod_year: int
+    prod_company: varchar(30)
+
+
+table "project_about":
+    primary_key: varchar(20)
+    paragraph: varchar(500)
+    foreign_key (table "project_general"): varchar(20)
+
+
+table "project_production":
+    primary_key: varchar(20)
+    paragraph: varchar(500)
+    foreign_key (table "project_general"): varchar(20)
+
+
+table "project_typos":
+    primary_key: varchar(20)
+    font_family: varchar(20)
+    font_type: varchar(20)
+    font_size: varchar(5)
+    line_height: varchar(5)
+    foreign_key (table "project_general"): varchar(20)
+
+
+table "project_render":
+    primary_key: varchar(20)
+    rendering_time: varchar(5) + regex time format hh:MM checking
+    sampling_codec: varchar(10)
+    native_res: varchar(9) + regex resolution format RRRRxRRRR checking
+    aspect_ratio: float (round 2 digits), ex. 2,39
+    foreign_key (table "project_general"): varchar(20)
+
+
+table "project_colours":
+    primary_key: varchar(20)
+    main_background: varchar(7) + regex checking HEX color value
+    main_header: varchar(7) + regex checking HEX color value
+    tint_header: varchar(7) + regex checking HEX color value
+    paragr_foreground: varchar(7) + regex checking HEX color value
+    tech_background: varchar(7) + regex checking HEX color value
+    foreign_key (table "project_general"): varchar(20)
+
+
+table "used_software": (nieusuwalne)
+    primary_key: varchar(20)
+    software_name: varchar(100)
+    software_short: varchar(3)
+
+
+table "sofware_project" (binding tables)
+    primary_key: varchar(20)
+    software_for: varchar(50)
+    foreign_key (table "project_general"): varchar(20)
+    foreign_key (table "used_software"): varchar(20)
