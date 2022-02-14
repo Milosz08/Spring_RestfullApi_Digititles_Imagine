@@ -32,20 +32,9 @@ import javax.validation.constraints.*;
 
 @Data
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 @ToString
 @Table(name = "user_messages")
-public class UserMessagesModel extends AuditModel {
-
-    @Id
-    @GenericGenerator(
-        name = "user_messages_id",
-        strategy = "com.digititlesimagine.digititlesimaginebackend.utils.CustomIdGenerator"
-    )
-    @GeneratedValue(generator = "user_messages_id")
-    @Column(name = "user_messages_id")
-    private String id;
+public class UserMessagesModel extends AuditModelWithId {
 
     @Column(name = "user_name")
     @NotNull(message = "Blank field responsible for user name property")

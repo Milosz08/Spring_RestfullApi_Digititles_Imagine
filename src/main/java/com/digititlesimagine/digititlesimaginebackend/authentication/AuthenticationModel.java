@@ -33,16 +33,7 @@ import javax.validation.constraints.*;
 @NoArgsConstructor
 @ToString
 @Table(name = "authentications")
-public class AuthenticationModel extends AuditModel {
-
-    @Id
-    @GenericGenerator(
-        name = "authentication_id",
-        strategy = "com.digititlesimagine.digititlesimaginebackend.utils.CustomIdGenerator"
-    )
-    @GeneratedValue(generator = "authentication_id")
-    @Column(name = "authentication_id")
-    private String id;
+public class AuthenticationModel extends AuditModelWithId {
 
     @Column(name = "cms_username")
     @NotNull(message = "Blank field responsible for username property")
