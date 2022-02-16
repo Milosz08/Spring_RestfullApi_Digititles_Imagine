@@ -18,8 +18,10 @@
 
 package com.digititlesimagine.digititlesimaginebackend.project.software;
 
-import com.digititlesimagine.digititlesimaginebackend.utils.AuditModelWithId;
+import com.digititlesimagine.digititlesimaginebackend.utils.AuditModel;
+import com.digititlesimagine.digititlesimaginebackend.utils.AuditModelExcludeIDInResponse;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -29,7 +31,12 @@ import javax.validation.constraints.*;
 @Entity
 @ToString
 @Table(name = "project_software")
-public class ProjectSoftwareModel extends AuditModelWithId {
+public class ProjectSoftwareModel extends AuditModel {
+
+    @Id
+    @Column(name = "primary_key")
+    @JsonIgnore
+    private String id;
 
     @Column(name = "software_name")
     @NotNull(message = "Blank field responsible for software name property")
