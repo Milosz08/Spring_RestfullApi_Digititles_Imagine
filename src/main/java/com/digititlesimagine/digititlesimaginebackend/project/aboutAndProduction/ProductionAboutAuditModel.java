@@ -34,7 +34,8 @@ import javax.validation.constraints.*;
 public class ProductionAboutAuditModel extends AuditModelExcludeIDInResponse {
 
     @Column(name = "paragraph_iter")
-    private int paragraphIter;
+    @NotNull(message = "Blank field responsible for paragraph order property")
+    private int paragraphOrder;
 
     @Column(name = "project_paragraph")
     @NotNull(message = "Blank field responsible for paragraph property")
