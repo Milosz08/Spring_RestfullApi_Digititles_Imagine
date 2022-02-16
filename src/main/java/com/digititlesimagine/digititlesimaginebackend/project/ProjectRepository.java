@@ -19,7 +19,19 @@
 package com.digititlesimagine.digititlesimaginebackend.project;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
-public interface ProjectRepository extends JpaRepository<ProjectModel, String> { }
+public interface ProjectRepository extends JpaRepository<ProjectModel, String> {
+
+    @Query("SELECT p FROM ProjectModel p WHERE p.id=:id")
+    Optional<ProjectModel> findProjectModelById(@Param("id") String id);
+
+    @Query("SELECT p FROM ProjectModel p WHERE p.title=:title")
+    Optional<ProjectModel> findProjectModelByTitle(@Param("title") String title);
+
+}
