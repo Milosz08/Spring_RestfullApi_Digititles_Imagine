@@ -18,20 +18,22 @@
 
 package com.digititlesimagine.digititlesimaginebackend.project;
 
-import com.digititlesimagine.digititlesimaginebackend.project.aboutAndProduction.ProjectAboutModel;
-import com.digititlesimagine.digititlesimaginebackend.project.aboutAndProduction.ProjectProductionModel;
+import com.digititlesimagine.digititlesimaginebackend.project.aboutAndProduction.*;
 import com.digititlesimagine.digititlesimaginebackend.project.colours.ProjectColoursModel;
 import com.digititlesimagine.digititlesimaginebackend.project.render.ProjectRenderModel;
 import com.digititlesimagine.digititlesimaginebackend.project.software.ProjectSoftwareUsedModel;
 import com.digititlesimagine.digititlesimaginebackend.project.typos.ProjectTyposModel;
 import com.digititlesimagine.digititlesimaginebackend.utils.AuditModelWithId;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 @Data
@@ -59,31 +61,37 @@ public class ProjectModel extends AuditModelWithId {
     @NotEmpty(message = "Empty field responsible for project production company code property")
     private String prodCompany;
 
-    @OneToMany(targetEntity = ProjectAboutModel.class, cascade = CascadeType.ALL)
+    @Valid
+    @OneToMany(targetEntity = ProjectAboutModel.class, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "project_ref_key", referencedColumnName = "primary_key")
     @NotNull(message = "Empty array of objects responsible for storing project about section")
     private List<ProjectAboutModel> aboutSection = new LinkedList<>();
 
-    @OneToMany(targetEntity = ProjectProductionModel.class, cascade = CascadeType.ALL)
+    @Valid
+    @OneToMany(targetEntity = ProjectProductionModel.class, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "project_ref_key", referencedColumnName = "primary_key")
     @NotNull(message = "Empty array of objects responsible for storing project production section")
-    private List<ProjectAboutModel> prodSection = new LinkedList<>();
+    private List<ProjectProductionModel> prodSection = new LinkedList<>();
 
-    @OneToOne(targetEntity = ProjectTyposModel.class, cascade = CascadeType.ALL)
+    @Valid
+    @OneToOne(targetEntity = ProjectTyposModel.class, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "typos_ref_key", referencedColumnName = "primary_key")
     @NotNull(message = "Blank object responsible for storing project typography")
     private ProjectTyposModel typography = new ProjectTyposModel();
 
-    @OneToOne(targetEntity = ProjectRenderModel.class, cascade = CascadeType.ALL)
+    @Valid
+    @OneToOne(targetEntity = ProjectRenderModel.class, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "render_ref_key", referencedColumnName = "primary_key")
     @NotNull(message = "Blank object responsible for storing project render properties")
     private ProjectRenderModel renderProps = new ProjectRenderModel();
 
-    @OneToOne(targetEntity = ProjectColoursModel.class, cascade = CascadeType.ALL)
+    @Valid
+    @OneToOne(targetEntity = ProjectColoursModel.class, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "colours_ref_key", referencedColumnName = "primary_key")
     @NotNull(message = "Blank object responsible for storing project colours")
     private ProjectColoursModel projectColours = new ProjectColoursModel();
 
+    @Valid
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
         name = "software_binding",
