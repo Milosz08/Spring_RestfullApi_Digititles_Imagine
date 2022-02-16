@@ -41,7 +41,7 @@ public class UserMessagesController {
     }
 
     @PostMapping
-    public ResponseEntity<UserMessagesModel> addUserMessage(@Validated @RequestBody UserMessagesModel userMessagesModel) {
+    public ResponseEntity<UserMessagesModel> addUserMessage(@Valid @RequestBody UserMessagesModel userMessagesModel) {
         return new ResponseEntity<>(userMessagesService.addUserMessage(userMessagesModel), HttpStatus.CREATED);
     }
 

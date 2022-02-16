@@ -42,18 +42,18 @@ public class AuthenticationController {
     }
 
     @PostMapping
-    public ResponseEntity<AuthenticationModel> addSingleAuthentication(@Validated @RequestBody AuthenticationModel model) {
+    public ResponseEntity<AuthenticationModel> addSingleAuthentication(@Valid @RequestBody AuthenticationModel model) {
         return new ResponseEntity<>(authenticationService.addSingleCmsUser(model), HttpStatus.CREATED);
     }
 
     @PostMapping("/validate")
-    public ResponseEntity<AuthenticationResponse> validateCredentials(@Validated @RequestBody AuthenticationModel model) {
+    public ResponseEntity<AuthenticationResponse> validateCredentials(@Valid @RequestBody AuthenticationModel model) {
         return authenticationService.validateCredentials(model);
     }
 
     @PutMapping("/{role}")
     public ResponseEntity<AuthenticationModel> editSingleAuthneticatin(
-            @PathVariable Enums.Authentications role, @Validated @RequestBody AuthenticationModel model
+            @PathVariable Enums.Authentications role, @Valid @RequestBody AuthenticationModel model
     ) {
         return new ResponseEntity<>(authenticationService.editSingleCmsUser(role, model), HttpStatus.OK);
     }
