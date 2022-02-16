@@ -23,6 +23,7 @@ import org.springframework.http.*;
 import org.springframework.validation.annotation.*;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.*;
 
 import static com.digititlesimagine.digititlesimaginebackend.utils.ServletConfigurer.*;
