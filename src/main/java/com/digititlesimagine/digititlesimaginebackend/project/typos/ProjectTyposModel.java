@@ -43,12 +43,12 @@ public class ProjectTyposModel extends AuditModelWithId {
 
     @Column(name = "font_size")
     @NotNull(message = "Blank field responsible for font size property")
-    @Size(min = 2, max = 5, message = "Field responsible for font size should have from 2 to 5 characters")
+    @Size(min = 2, message = "Field responsible for font size should have at least of 2 characters")
     private String fontSize;
 
     @Column(name = "line_height")
     @NotNull(message = "Blank field responsible for line height property")
-    @Size(min = 2, max = 5, message = "Field responsible for line height should have from 2 to 5 characters")
+    @Size(min = 2, message = "Field responsible for line height should have at least of 2 characters")
     private String lineHeight;
 
 }
