@@ -37,9 +37,7 @@ public class JpaValidExceptionHandler extends ResponseEntityExceptionHandler {
     ) {
         List<String> errors = ex.getBindingResult().getFieldErrors().stream()
                 .map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.toList());
-        return new ResponseEntity<>(new JpaValidExceptionBody(
-                errors, status.value(), System.currentTimeMillis()
-        ), status);
+        return new ResponseEntity<>(new JpaValidExceptionBody(errors, status.value(), System.currentTimeMillis()), status);
     }
 
 }

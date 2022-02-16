@@ -21,8 +21,7 @@ package com.digititlesimagine.digititlesimaginebackend.exceptions;
 import lombok.*;
 import java.util.*;
 
-@Setter
-@Getter
+@Data
 @AllArgsConstructor
 public class JpaValidExceptionBody {
 
