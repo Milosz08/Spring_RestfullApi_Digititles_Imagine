@@ -24,7 +24,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Data
 @Entity
@@ -41,9 +43,10 @@ public class ProjectSoftwareUsedModel extends AuditModel {
     @NotNull(message = "Blank field responsible for software used for property")
     private String softwareFor;
 
-    @OneToOne(targetEntity = ProjectSoftwareModel.class, cascade = CascadeType.MERGE)
+    @Valid
+    @ManyToOne(targetEntity = ProjectSoftwareModel.class, cascade = CascadeType.MERGE)
     @JoinColumn(name = "software_ref_key", referencedColumnName = "primary_key")
     @NotNull(message = "Blank field responsible for software info object")
-    private ProjectSoftwareModel usedSoftware = new ProjectSoftwareModel();
+    private ProjectSoftwareModel software = new ProjectSoftwareModel();
 
 }
