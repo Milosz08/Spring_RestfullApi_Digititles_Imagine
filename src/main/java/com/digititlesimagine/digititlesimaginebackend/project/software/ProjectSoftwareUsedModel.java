@@ -41,6 +41,7 @@ public class ProjectSoftwareUsedModel extends AuditModel {
 
     @Column(name = "software_for")
     @NotNull(message = "Blank field responsible for software used for property")
+    @Size(min = 5, message = "Field responsible for software used for should have at least of 5 characters")
     private String softwareFor;
 
     @Valid
