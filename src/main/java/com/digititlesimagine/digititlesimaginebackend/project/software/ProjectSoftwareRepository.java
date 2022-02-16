@@ -19,7 +19,16 @@
 package com.digititlesimagine.digititlesimaginebackend.project.software;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-public interface ProjectSoftwareRepository extends JpaRepository<ProjectSoftwareModel, String> { }
+public interface ProjectSoftwareRepository extends JpaRepository<ProjectSoftwareModel, String> {
+
+    @Query("SELECT p FROM ProjectSoftwareModel p WHERE p.softwareFullName=:f AND p.softwareShortName=:s")
+    List<ProjectSoftwareModel> findProjectSoftwareByAllParams(@Param("f") String name, @Param("s") String shortName);
+
+}
