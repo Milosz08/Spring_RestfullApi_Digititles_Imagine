@@ -19,7 +19,16 @@
 package com.digititlesimagine.digititlesimaginebackend.project.software;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
-public interface ProjectSoftwareUsedRepository extends JpaRepository<ProjectSoftwareUsedModel, String> { }
+public interface ProjectSoftwareUsedRepository extends JpaRepository<ProjectSoftwareUsedModel, String> {
+
+    @Query("SELECT p FROM ProjectSoftwareUsedModel p WHERE p.softwareFor=:sf")
+    Optional<ProjectSoftwareUsedModel> findMatchUsedSoftware(@Param("sf") String softwareFor);
+
+}
