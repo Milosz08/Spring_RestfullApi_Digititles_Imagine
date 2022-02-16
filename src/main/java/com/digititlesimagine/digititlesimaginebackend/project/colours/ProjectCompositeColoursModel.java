@@ -18,7 +18,7 @@
 
 package com.digititlesimagine.digititlesimaginebackend.project.colours;
 
-import com.digititlesimagine.digititlesimaginebackend.utils.AuditModelWithId;
+import com.digititlesimagine.digititlesimaginebackend.utils.AuditModelExcludeIDInResponse;
 
 import lombok.*;
 import javax.persistence.*;
@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Entity
 @ToString
 @Table(name = "project_composite_colours")
-public class ProjectCompositeColoursModel extends AuditModelWithId {
+public class ProjectCompositeColoursModel extends AuditModelExcludeIDInResponse {
 
     @Column(name = "composite_colour")
     @NotNull(message = "Blank field responsible for composite colour colour property")

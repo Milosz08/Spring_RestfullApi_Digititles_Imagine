@@ -18,11 +18,12 @@
 
 package com.digititlesimagine.digititlesimaginebackend.project.colours;
 
-import com.digititlesimagine.digititlesimaginebackend.utils.AuditModelWithId;
+import com.digititlesimagine.digititlesimaginebackend.utils.AuditModelExcludeIDInResponse;
 
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.LinkedList;
 import java.util.List;
@@ -31,7 +32,7 @@ import java.util.List;
 @Entity
 @ToString
 @Table(name = "project_colours")
-public class ProjectColoursModel extends AuditModelWithId {
+public class ProjectColoursModel extends AuditModelExcludeIDInResponse {
 
     @Column(name = "main_background")
     @NotNull(message = "Blank field responsible for main background colour property")
@@ -78,6 +79,7 @@ public class ProjectColoursModel extends AuditModelWithId {
     )
     private String techBackground;
 
+    @Valid
     @OneToMany(targetEntity = ProjectCompositeColoursModel.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "project_colours_ref_key", referencedColumnName = "primary_key")
     @NotNull(message = "Empty array of objects responsible for storing project composite colours")

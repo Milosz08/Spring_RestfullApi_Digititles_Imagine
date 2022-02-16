@@ -18,7 +18,7 @@
 
 package com.digititlesimagine.digititlesimaginebackend.project.aboutAndProduction;
 
-import com.digititlesimagine.digititlesimaginebackend.utils.AuditModelWithId;
+import com.digititlesimagine.digititlesimaginebackend.utils.AuditModelExcludeIDInResponse;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -31,7 +31,7 @@ import javax.validation.constraints.*;
 @ToString
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class ProductionAboutAuditModel extends AuditModelWithId {
+public class ProductionAboutAuditModel extends AuditModelExcludeIDInResponse {
 
     @Column(name = "paragraph_iter")
     private int paragraphIter;

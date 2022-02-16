@@ -18,7 +18,8 @@
 
 package com.digititlesimagine.digititlesimaginebackend.project.render;
 
-import com.digititlesimagine.digititlesimaginebackend.utils.AuditModelWithId;
+import com.digititlesimagine.digititlesimaginebackend.utils.AuditModelExcludeIDInResponse;
+
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,12 +29,11 @@ import javax.validation.constraints.*;
 @Entity
 @ToString
 @Table(name = "project_render")
-public class ProjectRenderModel extends AuditModelWithId {
+public class ProjectRenderModel extends AuditModelExcludeIDInResponse {
 
     @Column(name = "rendering_time")
     @NotNull(message = "Blank field responsible for rendering time property")
-    @Size(min = 5, max = 5, message = "Field responsible for rendering time should have 5 characters")
-    private String renderingTime;
+    private float renderingTime;
 
     @Column(name = "sampling_codec")
     @NotNull(message = "Blank field responsible for sampling codec property")

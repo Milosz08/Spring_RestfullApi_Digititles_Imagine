@@ -17,8 +17,7 @@
  */
 
 package com.digititlesimagine.digititlesimaginebackend.project.typos;
-
-import com.digititlesimagine.digititlesimaginebackend.utils.AuditModelWithId;
+import com.digititlesimagine.digititlesimaginebackend.utils.AuditModelExcludeIDInResponse;
 
 import lombok.*;
 
@@ -29,7 +28,7 @@ import javax.validation.constraints.*;
 @Entity
 @ToString
 @Table(name = "project_typos")
-public class ProjectTyposModel extends AuditModelWithId {
+public class ProjectTyposModel extends AuditModelExcludeIDInResponse {
 
     @Column(name = "font_family")
     @NotNull(message = "Blank field responsible for font family property")
