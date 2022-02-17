@@ -25,5 +25,6 @@ public class ServletConfigurer {
     public static final String USER_MESSAGES = "user-messages";
     public static final String AUTHENTICATIONS = "authentications";
     public static final String PROJECTS = "projects";
+    public static final String REGISTRATION = "registration";
 
 }
