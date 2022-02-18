@@ -32,7 +32,7 @@ public class ApiExceptionHandler {
         return new ResponseEntity<>(apiException, badRequest);
     }
 
-    @ExceptionHandler(value = {MaxUploadSizeExceededException.class })
+    @ExceptionHandler(value = { MaxUploadSizeExceededException.class })
     public ResponseEntity<Object> handleUploadFilesSizeException(MaxUploadSizeExceededException e) {
         HttpStatus status = HttpStatus.EXPECTATION_FAILED;
         String message = "One or more files are too large";
