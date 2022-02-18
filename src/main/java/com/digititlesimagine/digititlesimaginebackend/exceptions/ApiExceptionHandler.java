@@ -20,6 +20,7 @@ package com.digititlesimagine.digititlesimaginebackend.exceptions;
 
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 @ControllerAdvice
 public class ApiExceptionHandler {
@@ -29,6 +30,14 @@ public class ApiExceptionHandler {
         HttpStatus badRequest = e.getHttpStatus();
         ApiException apiException = new ApiException(e.getMessage(), badRequest.value(), System.currentTimeMillis());
         return new ResponseEntity<>(apiException, badRequest);
+    }
+
+    @ExceptionHandler(value = {MaxUploadSizeExceededException.class })
+    public ResponseEntity<Object> handleUploadFilesSizeException(MaxUploadSizeExceededException e) {
+        HttpStatus status = HttpStatus.EXPECTATION_FAILED;
+        String message = "One or more files are too large";
+        ApiException apiException = new ApiException(message, status.value(), System.currentTimeMillis());
+        return new ResponseEntity<>(apiException, status);
     }
 
 }
