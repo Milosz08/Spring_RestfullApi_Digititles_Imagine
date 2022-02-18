@@ -2,7 +2,7 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl>
  *
  * File name: ServletConfigurer.java
- * Last modified: 11/02/2022, 12:40
+ * Last modified: 18/02/2022, 13:57
  * Project name: digititles-imagine-backend
  *
  * Licensed under the MIT license; you may not use this file except in compliance with the License.
@@ -26,5 +26,6 @@ public class ServletConfigurer {
     public static final String AUTHENTICATIONS = "authentications";
     public static final String PROJECTS = "projects";
     public static final String REGISTRATION = "registration";
+    public static final String PHOTOS = "photos";
 
 }
