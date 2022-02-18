@@ -20,13 +20,12 @@ package com.digititlesimagine.digititlesimaginebackend.userMessages;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
-import org.springframework.validation.annotation.*;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.*;
 
-import static com.digititlesimagine.digititlesimaginebackend.utils.ServletConfigurer.*;
+import static com.digititlesimagine.digititlesimaginebackend.configurer.ServletConfigurer.*;
 
 @RestController
 @RequestMapping(APP_PREFIX + USER_MESSAGES)
