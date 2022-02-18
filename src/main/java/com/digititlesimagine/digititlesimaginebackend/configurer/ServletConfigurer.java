@@ -16,7 +16,7 @@
  * COPIES OR SUBSTANTIAL PORTIONS OF THE SOFTWARE.
  */
 
-package com.digititlesimagine.digititlesimaginebackend.utils;
+package com.digititlesimagine.digititlesimaginebackend.configurer;
 
 public class ServletConfigurer {
 

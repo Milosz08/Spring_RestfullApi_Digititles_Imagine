@@ -2,7 +2,7 @@
  * Copyright (c) 2022 by MILOSZ GILGA <https://miloszgilga.pl>
  *
  * File name: SecurityConfigurer.java
- * Last modified: 11/02/2022, 12:28
+ * Last modified: 17/02/2022, 21:29
  * Project name: digititles-imagine-backend
  *
  * Licensed under the MIT license; you may not use this file except in compliance with the License.
@@ -16,13 +16,12 @@
  * COPIES OR SUBSTANTIAL PORTIONS OF THE SOFTWARE.
  */
 
-package com.digititlesimagine.digititlesimaginebackend;
+package com.digititlesimagine.digititlesimaginebackend.configurer;
 
 import com.digititlesimagine.digititlesimaginebackend.jwt.*;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.context.annotation.*;
-import org.springframework.http.*;
 import org.springframework.security.authentication.*;
 import org.springframework.security.config.annotation.authentication.builders.*;
 import org.springframework.security.config.annotation.web.builders.*;
@@ -33,7 +32,7 @@ import org.springframework.security.web.authentication.*;
 
 import javax.servlet.*;
 
-import static com.digititlesimagine.digititlesimaginebackend.utils.ServletConfigurer.*;
+import static com.digititlesimagine.digititlesimaginebackend.configurer.ServletConfigurer.*;
 
 @EnableWebSecurity
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
@@ -66,10 +65,11 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, USER_MESSAGES_PATTERN).permitAll()
-                .antMatchers(HttpMethod.GET, "/**").permitAll()
-                .antMatchers(HttpMethod.POST, LOGIN_PATTERN).permitAll()
-                .anyRequest().authenticated()
+                //.antMatchers(HttpMethod.POST, USER_MESSAGES_PATTERN).permitAll()
+                //.antMatchers(HttpMethod.GET, "/**").permitAll()
+                //.antMatchers(HttpMethod.POST, LOGIN_PATTERN).permitAll()
+                //.anyRequest().authenticated()
+                .anyRequest().permitAll()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
