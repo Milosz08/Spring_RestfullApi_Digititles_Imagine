@@ -18,9 +18,13 @@
 
 package com.digititlesimagine.digititlesimaginebackend.project;
 
+import com.digititlesimagine.digititlesimaginebackend.projectPhotosHandling.ProjectPhotosServices;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -35,6 +39,8 @@ public class ProjectController {
 
     @Autowired
     private ProjectServices services;
+    @Autowired
+    private ProjectPhotosServices photosServices;
 
     @GetMapping
     public ResponseEntity<List<ProjectModel>> getAllProjects() {
@@ -66,12 +72,14 @@ public class ProjectController {
     @DeleteMapping("/{idValue}")
     public ResponseEntity<?> deleteSingleProject(@PathVariable String idValue) {
         services.deleteSingleProject(idValue);
+        photosServices.deleteImagesFromSingleProject(idValue);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping
     public ResponseEntity<?> deleteAllProjects() {
         services.deleteAllProjects();
+        photosServices.deleteImagesFromAllProjects();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
