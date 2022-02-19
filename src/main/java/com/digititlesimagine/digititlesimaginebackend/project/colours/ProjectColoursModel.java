@@ -79,6 +79,15 @@ public class ProjectColoursModel extends AuditModelExcludeIDInResponse {
     )
     private String techBackground;
 
+    @Column(name = "strong_colour")
+    @NotNull(message = "Blank field responsible for strong colour property")
+    @Size(min = 4, max = 7, message = "Field responsible for strong colour must have from 4 to 7 characters")
+    @Pattern(
+        regexp = "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
+        message = "Correct format for strong colour field is #XXXXXX or #XXX in hexadecimal"
+    )
+    private String strongForeground;
+
     @Valid
     @OneToMany(targetEntity = ProjectCompositeColoursModel.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "project_colours_ref_key", referencedColumnName = "primary_key")
