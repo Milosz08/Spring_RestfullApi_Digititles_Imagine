@@ -31,7 +31,7 @@ public interface ProjectRepository extends JpaRepository<ProjectModel, String> {
     @Query("SELECT p FROM ProjectModel p WHERE p.id=:id")
     Optional<ProjectModel> findProjectModelById(@Param("id") String id);
 
-    @Query("SELECT p FROM ProjectModel p WHERE p.title=:title")
-    Optional<ProjectModel> findProjectModelByTitle(@Param("title") String title);
+    @Query("SELECT p FROM ProjectModel p WHERE p.projectPath=:path")
+    Optional<ProjectModel> findProjectModelByPath(@Param("path") String path);
 
 }

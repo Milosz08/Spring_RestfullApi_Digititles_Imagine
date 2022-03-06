@@ -24,7 +24,7 @@ public interface ProjectServices {
 
     List<ProjectModel> getAllProjects();
     ProjectModel getSingleProjectById(String id);
-    ProjectModel getSingleProjectByTitle(String title);
+    ProjectModel getSingleProjectByPath(String title);
     ProjectModel addSingleProject(ProjectModel project);
     ProjectModel editSingleProject(String id, ProjectModel project);
     void deleteSingleProject(String id);

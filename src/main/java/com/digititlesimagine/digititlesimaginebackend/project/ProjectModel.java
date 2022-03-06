@@ -25,9 +25,9 @@ import com.digititlesimagine.digititlesimaginebackend.project.software.ProjectSo
 import com.digititlesimagine.digititlesimaginebackend.project.typos.ProjectTyposModel;
 import com.digititlesimagine.digititlesimaginebackend.utils.AuditModelWithId;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import com.fasterxml.jackson.annotation.*;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -46,6 +46,9 @@ public class ProjectModel extends AuditModelWithId {
     @NotNull(message = "Blank field responsible for project title property")
     @Size(min = 2, max = 100, message = "Field responsible for project title should have from 2 to 100 characters")
     private String title;
+
+    @Column(name = "title_path")
+    private String projectPath;
 
     @Column(name = "embed_code")
     @NotNull(message = "Blank field responsible for project embed code property")

@@ -50,14 +50,14 @@ public class ProjectServicesImplementation extends ServicesImplementationHelpers
     }
 
     @Override
-    public ProjectModel getSingleProjectByTitle(String title) {
-        Optional<ProjectModel> foundProject = repository.findProjectModelByTitle(title);
+    public ProjectModel getSingleProjectByPath(String path) {
+        Optional<ProjectModel> foundProject = repository.findProjectModelByPath(path);
         if (foundProject.isPresent()) {
             ProjectModel sortedProject = foundProject.get();
             sortAboutAndProductionParagraphs(sortedProject);
             return sortedProject;
         }
-        throw new ApiRequestException("Project with title: '" + title + "' does not exist", HttpStatus.NOT_FOUND);
+        throw new ApiRequestException("Project with title path: '" + path + "' does not exist", HttpStatus.NOT_FOUND);
     }
 
     @Override

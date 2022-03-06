@@ -22,6 +22,7 @@ import com.digititlesimagine.digititlesimaginebackend.projectPhotosHandling.Proj
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,8 +54,8 @@ public class ProjectController {
     }
 
     @GetMapping("/title/{titleValue}")
-    public ResponseEntity<ProjectModel> getSingleProjectByTitle(@PathVariable String titleValue) {
-        return new ResponseEntity<>(services.getSingleProjectByTitle(titleValue), HttpStatus.OK);
+    public ResponseEntity<ProjectModel> getSingleProjectByPath(@PathVariable String titleValue) {
+        return new ResponseEntity<>(services.getSingleProjectByPath(titleValue), HttpStatus.OK);
     }
 
     @PostMapping
