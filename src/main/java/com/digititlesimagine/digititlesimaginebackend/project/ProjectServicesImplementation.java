@@ -20,6 +20,7 @@ package com.digititlesimagine.digititlesimaginebackend.project;
 
 import com.digititlesimagine.digititlesimaginebackend.exceptions.ApiRequestException;
 
+import com.digititlesimagine.digititlesimaginebackend.utils.AuditModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,7 @@ public class ProjectServicesImplementation extends ServicesImplementationHelpers
         for(ProjectModel singleProject : reversed) {
             sortAboutAndProductionParagraphs(singleProject);
         }
+        reversed.sort(Comparator.comparing(AuditModel::getCreatedAt));
         return reversed;
     }
 
@@ -64,6 +66,7 @@ public class ProjectServicesImplementation extends ServicesImplementationHelpers
     public ProjectModel addSingleProject(ProjectModel project) {
         ProjectModel savedData = saveSingleProjectSoftCascade(project);
         sortAboutAndProductionParagraphs(savedData);
+        savedData.setProjectPath(generateProjectPath(savedData.getTitle()));
         return savedData;
     }
 
