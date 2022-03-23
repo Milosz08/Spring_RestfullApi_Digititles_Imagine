@@ -38,7 +38,7 @@ public class RegistrationPropertiesModel extends AuditModelExcludeIDInResponse {
 
     @Column(name = "filmmaker_size")
     @NotNull(message = "Blank field responsible for filmmaker size property")
-    private Enums.FilmmakerSize filmmakerSize;
+    private String filmmakerSize;
 
     @Column(name = "filmmaker_budget")
     @NotNull(message = "Blank field responsible for filmmaker budget property")
