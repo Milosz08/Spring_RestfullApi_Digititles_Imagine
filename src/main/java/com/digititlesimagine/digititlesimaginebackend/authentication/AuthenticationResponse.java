@@ -47,7 +47,7 @@ public class AuthenticationResponse {
 
     private Map<String, Object> generateAllErrors(List<Boolean> valid) {
         Map<String, Object> credentialsFields = new LinkedHashMap<>();
-        String[] allKeys = { "username", "password", "token" };
+        String[] allKeys = { "username", "password" };
         if(valid.isEmpty() || valid.size() > 3) {
             throw new ApiRequestException("Credentials data fields have bad size", HttpStatus.BAD_REQUEST);
         }
