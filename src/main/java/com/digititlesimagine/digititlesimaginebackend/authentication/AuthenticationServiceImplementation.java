@@ -105,13 +105,11 @@ public class AuthenticationServiceImplementation implements AuthenticationServic
         List<Boolean> returnList = new ArrayList<>();
         returnList.add(model.getUsername().equals(foundModel.getUsername()));
         returnList.add(BCrypt.checkpw(model.getPassword(), foundModel.getPassword()));
-        returnList.add(BCrypt.checkpw(model.getToken(), foundModel.getToken()));
         return returnList;
     }
 
     private AuthenticationModel encodeFields(AuthenticationModel model) {
         model.setPassword(passwordEncoder.encode(model.getPassword()));
-        model.setToken(passwordEncoder.encode(model.getToken()));
         return model;
     }
 
