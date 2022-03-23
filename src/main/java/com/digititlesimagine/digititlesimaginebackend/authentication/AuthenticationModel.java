@@ -45,13 +45,7 @@ public class AuthenticationModel extends AuditModelWithId {
     @Size(min = 8, max = 500, message = "Field responsible for cms password should have at least 8 characters")
     private String password;
 
-    @Column(name = "cms_token")
-    @NotNull(message = "Blank field responsible for token property")
-    @Size(min = 8, max = 500, message = "Field responsible for cms token should have at least 8 characters")
-    private String token;
-
-    @Column(name = "cms_role", unique = true)
-    @NotNull(message = "Blank field responsible for cms role property")
+    @Column(name = "cms_role")
     private Enums.Authentications role;
 
 }
