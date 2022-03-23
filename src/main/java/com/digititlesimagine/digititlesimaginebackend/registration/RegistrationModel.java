@@ -36,22 +36,21 @@ public class RegistrationModel extends AuditModelWithId {
     @Column(name = "user_name")
     @NotNull(message = "Blank field responsible for user name property")
     @Size(min = 2, max = 30, message = "Field responsible for user name should have from 2 to 30 characters")
-    private String userName;
+    private String username;
 
     @Column(name = "user_lastname")
     @NotNull(message = "Blank field responsible for user lastname property")
-    @Size(min = 2, max = 30, message = "Field responsible for user lastname should have from 2 to 30 characters")
-    private String userLastname;
+    private String lastname;
 
     @Column(name = "user_email")
     @NotNull(message = "Blank field responsible for user email property")
     @Size(min = 5, max = 30, message = "Field responsible for user lastname should have from 5 to 30 characters")
-    private String userEmail;
+    private String email;
 
     @Column(name = "user_message")
     @NotNull(message = "Blank field responsible for user message property")
     @Size(min = 10, max = 300, message = "Field responsible for user message should have from 10 to 300 characters")
-    private String userMessage;
+    private String message;
 
     @Valid
     @OneToOne(targetEntity = RegistrationPropertiesModel.class, cascade = CascadeType.ALL, orphanRemoval = true)
