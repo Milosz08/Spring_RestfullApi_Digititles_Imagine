@@ -24,8 +24,4 @@ public class Enums {
         UNDEFINED, MODERATOR, ADMINISTRATOR
     }
 
-    public enum FilmmakerSize {
-        SMALL, MEDIUM, LARGE
-    }
-
 }
