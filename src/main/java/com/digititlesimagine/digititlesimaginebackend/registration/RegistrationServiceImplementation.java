@@ -49,7 +49,7 @@ public class RegistrationServiceImplementation implements RegistrationService {
 
     @Override
     public RegistrationModel addRegistration(RegistrationModel registration) {
-        if (!registration.getUserEmail().contains("@")) {
+        if (!registration.getEmail().contains("@")) {
             throw new ApiRequestException(
                 "User email field has not valid template in registration form", HttpStatus.BAD_REQUEST
             );
