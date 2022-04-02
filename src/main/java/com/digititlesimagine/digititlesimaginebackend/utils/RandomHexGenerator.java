@@ -22,7 +22,7 @@ import java.util.*;
 
 public class RandomHexGenerator {
 
-    private int sequenceStringCount;
+    private final int sequenceStringCount;
 
     public RandomHexGenerator() {
         this.sequenceStringCount = 20;
