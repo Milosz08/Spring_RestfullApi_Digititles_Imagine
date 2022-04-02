@@ -20,7 +20,6 @@ package com.digititlesimagine.digititlesimaginebackend.registration;
 
 import com.digititlesimagine.digititlesimaginebackend.exceptions.ApiRequestException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -30,8 +29,11 @@ import java.util.Optional;
 @Service
 public class RegistrationServiceImplementation implements RegistrationService {
 
-    @Autowired
-    private RegistrationRepository repository;
+    private final RegistrationRepository repository;
+
+    public RegistrationServiceImplementation(RegistrationRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public List<RegistrationModel> getAllRegistrations() {

@@ -23,7 +23,6 @@ import com.digititlesimagine.digititlesimaginebackend.exceptions.ApiRequestExcep
 import com.digititlesimagine.digititlesimaginebackend.project.ProjectModel;
 import com.digititlesimagine.digititlesimaginebackend.project.ProjectRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpStatus;
@@ -48,8 +47,11 @@ public class ProjectPhotosServicesImplementation implements ProjectPhotosService
     private static final String UPLOAD_DIR = System.getProperty("user.dir") + "/src/main/resources/static/" + UPLOAD_FOLDER;
     private static final List<String> IMG_TYPES = Arrays.asList("image/png", "image/jpeg");
 
-    @Autowired
-    private ProjectRepository projectRepository;
+    private final ProjectRepository projectRepository;
+
+    public ProjectPhotosServicesImplementation(ProjectRepository projectRepository) {
+        this.projectRepository = projectRepository;
+    }
 
     @Override
     public Path init(String projectId) {

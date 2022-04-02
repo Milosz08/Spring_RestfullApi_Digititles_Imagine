@@ -26,19 +26,24 @@ import com.digititlesimagine.digititlesimaginebackend.project.software.ProjectSo
 
 import com.digititlesimagine.digititlesimaginebackend.utils.RandomHexGenerator;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class ServicesImplementationHelpers {
 
-    @Autowired
-    protected ProjectRepository repository;
-    @Autowired
-    protected ProjectSoftwareRepository softRepository;
-    @Autowired
-    protected ProjectSoftwareUsedRepository usedSoftRepository;
+    protected final ProjectRepository repository;
+    protected final ProjectSoftwareRepository softRepository;
+    protected final ProjectSoftwareUsedRepository usedSoftRepository;
+
+    public ServicesImplementationHelpers(
+            ProjectRepository repository,
+            ProjectSoftwareRepository softRepository,
+            ProjectSoftwareUsedRepository usedSoftRepository
+    ) {
+        this.repository = repository;
+        this.softRepository = softRepository;
+        this.usedSoftRepository = usedSoftRepository;
+    }
 
     protected static String generateProjectPath(String title) {
         String titleLower = title.toLowerCase(Locale.ROOT)

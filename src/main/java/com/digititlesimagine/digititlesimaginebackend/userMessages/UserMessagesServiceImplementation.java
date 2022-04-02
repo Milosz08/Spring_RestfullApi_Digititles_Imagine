@@ -28,8 +28,11 @@ import java.util.*;
 @Service
 public class UserMessagesServiceImplementation implements UserMessagesService {
 
-    @Autowired
-    private UserMessagesRepository userMessagesRepository;
+    private final UserMessagesRepository userMessagesRepository;
+
+    public UserMessagesServiceImplementation(UserMessagesRepository userMessagesRepository) {
+        this.userMessagesRepository = userMessagesRepository;
+    }
 
     @Override
     public List<UserMessagesModel> getAllUserMessages() {

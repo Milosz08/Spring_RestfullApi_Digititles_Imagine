@@ -40,10 +40,13 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     private static final String USER_MESSAGES_PATTERN = APP_PREFIX + USER_MESSAGES + "/**";
     private static final String LOGIN_PATTERN = APP_PREFIX + AUTHENTICATIONS + "/validate/**";
 
-    @Autowired
-    private DbUserDetailsService dbUserDetailsService;
-    @Autowired
-    private Filter jwtRequestFilter;
+    private final DbUserDetailsService dbUserDetailsService;
+    private final Filter jwtRequestFilter;
+
+    public SecurityConfigurer(DbUserDetailsService dbUserDetailsService, Filter jwtRequestFilter) {
+        this.dbUserDetailsService = dbUserDetailsService;
+        this.jwtRequestFilter = jwtRequestFilter;
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

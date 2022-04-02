@@ -38,10 +38,13 @@ import static com.digititlesimagine.digititlesimaginebackend.configurer.ServletC
 @CrossOrigin
 public class ProjectController {
 
-    @Autowired
-    private ProjectServices services;
-    @Autowired
-    private ProjectPhotosServices photosServices;
+    private final ProjectServices services;
+    private final ProjectPhotosServices photosServices;
+
+    public ProjectController(ProjectServices services, ProjectPhotosServices photosServices) {
+        this.services = services;
+        this.photosServices = photosServices;
+    }
 
     @GetMapping
     public ResponseEntity<List<ProjectModel>> getAllProjects() {

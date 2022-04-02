@@ -36,16 +36,20 @@ public class AuthenticationServiceImplementation implements AuthenticationServic
 
     private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private AuthenticationRepository authenticationRepository;
+    private final AuthenticationRepository authenticationRepository;
+    private final DbUserDetailsService dbUserDetailsService;
+    private final JwtUtil jwtUtil;
 
-    @Autowired
-    private DbUserDetailsService dbUserDetailsService;
-    @Autowired
-    private JwtUtil jwtUtil;
-
-    public AuthenticationServiceImplementation(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = new BCryptPasswordEncoder();
+    public AuthenticationServiceImplementation(
+            PasswordEncoder passwordEncoder,
+            AuthenticationRepository authenticationRepository,
+            DbUserDetailsService dbUserDetailsService,
+            JwtUtil jwtUtil
+    ) {
+        this.passwordEncoder = passwordEncoder;
+        this.authenticationRepository = authenticationRepository;
+        this.dbUserDetailsService = dbUserDetailsService;
+        this.jwtUtil = jwtUtil;
     }
 
     @Override

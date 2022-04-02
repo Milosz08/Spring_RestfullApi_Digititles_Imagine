@@ -18,7 +18,6 @@
 
 package com.digititlesimagine.digititlesimaginebackend.projectPhotosHandling;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -37,8 +36,11 @@ import static com.digititlesimagine.digititlesimaginebackend.configurer.ServletC
 @CrossOrigin
 public class ProjectPhotosController {
 
-    @Autowired
-    private ProjectPhotosServices services;
+    private final ProjectPhotosServices services;
+
+    public ProjectPhotosController(ProjectPhotosServices services) {
+        this.services = services;
+    }
 
     @GetMapping
     public ResponseEntity<List<Map<String, Object>>> getAllFilesFromAllProjects(HttpServletRequest request) {
@@ -62,7 +64,7 @@ public class ProjectPhotosController {
 
     @PostMapping("upload/{projectId}")
     public ResponseEntity<ProjectPhotosResponseModel> fileUpload(
-        @RequestParam("files") MultipartFile[] files, @PathVariable String projectId
+            @RequestParam("files") MultipartFile[] files, @PathVariable String projectId
     ) {
         return new ResponseEntity<>(services.saveImagesForSingleProject(files, projectId), HttpStatus.CREATED);
     }

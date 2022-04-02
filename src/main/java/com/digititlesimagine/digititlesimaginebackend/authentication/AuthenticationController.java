@@ -32,8 +32,11 @@ import static com.digititlesimagine.digititlesimaginebackend.configurer.ServletC
 @CrossOrigin
 public class AuthenticationController {
 
-    @Autowired
-    private AuthenticationService authenticationService;
+    private final AuthenticationService authenticationService;
+
+    public AuthenticationController(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
+    }
 
     @GetMapping("/{role}")
     public ResponseEntity<AuthenticationModel> getSingleAuthentication(@PathVariable Enums.Authentications role) {

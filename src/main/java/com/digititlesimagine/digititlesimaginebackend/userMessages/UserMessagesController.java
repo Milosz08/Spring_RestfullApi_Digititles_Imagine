@@ -32,8 +32,11 @@ import static com.digititlesimagine.digititlesimaginebackend.configurer.ServletC
 @CrossOrigin
 public class UserMessagesController {
 
-    @Autowired
-    private UserMessagesService userMessagesService;
+    private final UserMessagesService userMessagesService;
+
+    public UserMessagesController(UserMessagesService userMessagesService) {
+        this.userMessagesService = userMessagesService;
+    }
 
     @GetMapping
     public ResponseEntity<List<UserMessagesModel>> getAllUserMessages() {

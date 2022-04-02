@@ -20,6 +20,8 @@ package com.digititlesimagine.digititlesimaginebackend.project;
 
 import com.digititlesimagine.digititlesimaginebackend.exceptions.ApiRequestException;
 
+import com.digititlesimagine.digititlesimaginebackend.project.software.ProjectSoftwareRepository;
+import com.digititlesimagine.digititlesimaginebackend.project.software.ProjectSoftwareUsedRepository;
 import com.digititlesimagine.digititlesimaginebackend.utils.AuditModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,14 @@ import java.util.*;
 
 @Service
 public class ProjectServicesImplementation extends ServicesImplementationHelpers implements ProjectServices {
+
+    public ProjectServicesImplementation(
+            ProjectRepository repository,
+            ProjectSoftwareRepository softRepository,
+            ProjectSoftwareUsedRepository usedSoftRepository
+    ) {
+        super(repository, softRepository, usedSoftRepository);
+    }
 
     @Override
     public List<ProjectModel> getAllProjects() {

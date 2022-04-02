@@ -18,7 +18,6 @@
 
 package com.digititlesimagine.digititlesimaginebackend.registration;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,8 +32,11 @@ import static com.digititlesimagine.digititlesimaginebackend.configurer.ServletC
 @CrossOrigin
 public class RegistrationController {
 
-    @Autowired
-    private RegistrationService service;
+    private final RegistrationService service;
+
+    public RegistrationController(RegistrationService service) {
+        this.service = service;
+    }
 
     @GetMapping
     public ResponseEntity<List<RegistrationModel>> getAllRegistrations() {
