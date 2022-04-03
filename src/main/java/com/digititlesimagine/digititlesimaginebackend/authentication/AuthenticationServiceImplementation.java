@@ -70,6 +70,7 @@ public class AuthenticationServiceImplementation implements AuthenticationServic
         Optional<AuthenticationModel> findCmsUserByRole = authenticationRepository.findAuthenticationsModelByRole(role);
         if (findCmsUserByRole.isPresent()) {
             model.setId(findCmsUserByRole.get().getId());
+            model.setRole(findCmsUserByRole.get().getRole());
             return authenticationRepository.save(encodeFields(model));
         }
         throw new ApiRequestException("User with role: '" + role + "' does not exist", HttpStatus.NOT_FOUND);
