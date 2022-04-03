@@ -41,12 +41,11 @@ public class AuthenticationServiceImplementation implements AuthenticationServic
     private final JwtUtil jwtUtil;
 
     public AuthenticationServiceImplementation(
-            PasswordEncoder passwordEncoder,
             AuthenticationRepository authenticationRepository,
             DbUserDetailsService dbUserDetailsService,
             JwtUtil jwtUtil
     ) {
-        this.passwordEncoder = passwordEncoder;
+        this.passwordEncoder = new BCryptPasswordEncoder();
         this.authenticationRepository = authenticationRepository;
         this.dbUserDetailsService = dbUserDetailsService;
         this.jwtUtil = jwtUtil;
