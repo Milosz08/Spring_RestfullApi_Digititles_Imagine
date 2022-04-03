@@ -22,6 +22,7 @@ import com.digititlesimagine.digititlesimaginebackend.jwt.*;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.context.annotation.*;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.*;
 import org.springframework.security.config.annotation.authentication.builders.*;
 import org.springframework.security.config.annotation.web.builders.*;
@@ -68,11 +69,10 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
                 .authorizeRequests()
-                //.antMatchers(HttpMethod.POST, USER_MESSAGES_PATTERN).permitAll()
-                //.antMatchers(HttpMethod.GET, "/**").permitAll()
-                //.antMatchers(HttpMethod.POST, LOGIN_PATTERN).permitAll()
-                //.anyRequest().authenticated()
-                .anyRequest().permitAll()
+                .antMatchers(HttpMethod.POST, USER_MESSAGES_PATTERN).permitAll()
+                .antMatchers(HttpMethod.GET, "/**").permitAll()
+                .antMatchers(HttpMethod.POST, LOGIN_PATTERN).permitAll()
+                .anyRequest().authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
