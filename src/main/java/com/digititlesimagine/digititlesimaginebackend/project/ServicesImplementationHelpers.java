@@ -94,4 +94,10 @@ public class ServicesImplementationHelpers {
         project.getProdSection().sort(Comparator.comparingInt(ProductionAboutAuditModel::getParagraphOrder));
     }
 
+    protected float ConvertResObjectIntoFrame(String nativeResolution) {
+        String[] firstAndSecondPart = nativeResolution.split("x");
+        double firstAndSecond = Double.parseDouble(firstAndSecondPart[0]) / Double.parseDouble(firstAndSecondPart[1]);
+        return Float.parseFloat(String.format(Locale.US, "%.2f", firstAndSecond));
+    }
+
 }

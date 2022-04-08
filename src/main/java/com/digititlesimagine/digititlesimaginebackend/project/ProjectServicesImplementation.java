@@ -77,6 +77,9 @@ public class ProjectServicesImplementation extends ServicesImplementationHelpers
         ProjectModel savedData = saveSingleProjectSoftCascade(project);
         sortAboutAndProductionParagraphs(savedData);
         savedData.setProjectPath(generateProjectPath(savedData.getTitle()));
+        savedData.getRenderProps().setAspectRatio(ConvertResObjectIntoFrame(
+                savedData.getRenderProps().getNativeResolution()
+        ));
         return savedData;
     }
 
@@ -85,6 +88,10 @@ public class ProjectServicesImplementation extends ServicesImplementationHelpers
         Optional<ProjectModel> foundProject = repository.findProjectModelById(id);
         if (foundProject.isPresent()) {
             project.setId(id);
+            project.getRenderProps().setAspectRatio(ConvertResObjectIntoFrame(
+                    project.getRenderProps().getNativeResolution()
+            ));
+            project.setProjectPath(generateProjectPath(project.getTitle()));
             ProjectModel savedData = saveSingleProjectSoftCascade(project);
             sortAboutAndProductionParagraphs(savedData);
             return savedData;

@@ -42,7 +42,7 @@ public class ProjectRenderModel extends AuditModelExcludeIDInResponse {
 
     @Column(name = "native_res")
     @NotNull(message = "Blank field responsible for native resolution property")
-    @Size(min = 7, max = 9, message = "Field responsible for native resolution should have from 2 to 10 characters")
+    @Size(min = 7, max = 9, message = "Field responsible for native resolution should have from 7 to 9 characters")
     private String nativeResolution;
 
     @Column(name = "short_res")
@@ -54,7 +54,6 @@ public class ProjectRenderModel extends AuditModelExcludeIDInResponse {
     private boolean ifImax = false;
 
     @Column(name = "aspect_ratio")
-    @NotNull(message = "Blank field responsible for aspect ratio property")
     private float aspectRatio;
 
 }
