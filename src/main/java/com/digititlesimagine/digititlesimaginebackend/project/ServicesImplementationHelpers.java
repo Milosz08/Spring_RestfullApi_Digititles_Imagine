@@ -48,8 +48,8 @@ public class ServicesImplementationHelpers {
     protected static String generateProjectPath(String title) {
         String titleLower = title.toLowerCase(Locale.ROOT)
                 .replaceAll(":", "")
-                .replaceAll("`", "-")
-                .replaceAll("/ /g", "-");
+                .replaceAll("'", "-")
+                .replaceAll(" ", "-");
         return titleLower.charAt(0) == '-' ? titleLower.substring(0) : titleLower;
     }
 

@@ -88,10 +88,10 @@ public class ProjectServicesImplementation extends ServicesImplementationHelpers
         Optional<ProjectModel> foundProject = repository.findProjectModelById(id);
         if (foundProject.isPresent()) {
             project.setId(id);
+            project.setProjectPath(generateProjectPath(project.getTitle()));
             project.getRenderProps().setAspectRatio(ConvertResObjectIntoFrame(
                     project.getRenderProps().getNativeResolution()
             ));
-            project.setProjectPath(generateProjectPath(project.getTitle()));
             ProjectModel savedData = saveSingleProjectSoftCascade(project);
             sortAboutAndProductionParagraphs(savedData);
             return savedData;
