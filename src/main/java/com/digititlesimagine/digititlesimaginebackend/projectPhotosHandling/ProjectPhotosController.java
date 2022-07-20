@@ -25,9 +25,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 import java.util.Map;
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 import static com.digititlesimagine.digititlesimaginebackend.configurer.ServletConfigurer.*;
 
@@ -62,7 +62,7 @@ public class ProjectPhotosController {
             .body(file);
     }
 
-    @PostMapping("upload/{projectId}")
+    @PostMapping(value = "/upload/{projectId}", consumes = { "multipart/form-data" })
     public ResponseEntity<ProjectPhotosResponseModel> fileUpload(
             @RequestParam("files") MultipartFile[] files, @PathVariable String projectId
     ) {

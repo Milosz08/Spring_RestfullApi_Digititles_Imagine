@@ -80,6 +80,7 @@ public class ProjectServicesImplementation extends ServicesImplementationHelpers
         savedData.getRenderProps().setAspectRatio(ConvertResObjectIntoFrame(
                 savedData.getRenderProps().getNativeResolution()
         ));
+        repository.save(savedData);
         return savedData;
     }
 
