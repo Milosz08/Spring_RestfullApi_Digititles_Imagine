@@ -28,7 +28,9 @@ public class WebConfigurer implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
+        registry
+                .addResourceHandler("/media/**")
+                .addResourceLocations("file://" + System.getProperty("user.dir") + "/src/main/media/");
     }
 
     @Override

@@ -45,7 +45,7 @@ import java.util.stream.Stream;
 public class ProjectPhotosServicesImplementation implements ProjectPhotosServices {
 
     private static final String UPLOAD_FOLDER = "java-uploads/";
-    private static final String UPLOAD_DIR = System.getProperty("user.dir") + "/src/main/resources/static/" + UPLOAD_FOLDER;
+    private static final String UPLOAD_DIR = System.getProperty("user.dir") + "/src/main/media/" + UPLOAD_FOLDER;
     private static final List<String> IMG_TYPES = Arrays.asList("image/png", "image/jpeg");
 
     private final ProjectRepository projectRepository;
