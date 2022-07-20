@@ -40,6 +40,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     private static final String USER_MESSAGES_PATTERN = APP_PREFIX + USER_MESSAGES + "/**";
     private static final String LOGIN_PATTERN = APP_PREFIX + AUTHENTICATIONS + "/validate/**";
+    private static final String REGISTRATION_PATTERN = APP_PREFIX + REGISTRATION + "/**";
 
     private final DbUserDetailsService dbUserDetailsService;
     private final Filter jwtRequestFilter;
@@ -72,6 +73,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, USER_MESSAGES_PATTERN).permitAll()
                 .antMatchers(HttpMethod.GET, "/**").permitAll()
                 .antMatchers(HttpMethod.POST, LOGIN_PATTERN).permitAll()
+                .antMatchers(HttpMethod.POST, REGISTRATION_PATTERN).permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
