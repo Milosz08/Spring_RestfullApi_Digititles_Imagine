@@ -23,6 +23,7 @@ import com.digititlesimagine.digititlesimaginebackend.exceptions.ApiRequestExcep
 import com.digititlesimagine.digititlesimaginebackend.project.ProjectModel;
 import com.digititlesimagine.digititlesimaginebackend.project.ProjectRepository;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpStatus;
@@ -126,6 +127,11 @@ public class ProjectPhotosServicesImplementation implements ProjectPhotosService
         Optional<ProjectModel> findingProject = projectRepository.findProjectModelById(id);
         if (!findingProject.isPresent()) {
             throw new ApiRequestException("Project with id: '" + id + "' not exist", HttpStatus.NOT_FOUND);
+        }
+        try {
+            FileUtils.cleanDirectory(dirPath.toFile());
+        } catch (IOException e) {
+            throw new ApiRequestException("Could not remove files in selected directory", HttpStatus.EXPECTATION_FAILED);
         }
         Arrays.stream(files).forEach(file -> {
             String fileContentType = file.getContentType();
