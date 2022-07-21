@@ -29,8 +29,8 @@ public class WebConfigurer implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
-                .addResourceHandler("/media/**")
-                .addResourceLocations("file://" + System.getProperty("user.dir") + "/src/main/media/");
+                .addResourceHandler("/java-uploads/**")
+                .addResourceLocations("classpath:/META-INF/java-uploads/");
     }
 
     @Override
