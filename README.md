@@ -1,7 +1,7 @@
 <h1 align="center">
   Restfull API for Digititles Imagine Web Application
   <br>
-  <img src="https://raw.githubusercontent.com/Milosz08/ReactJS_Web_Application_Digititles_Imagine/master/img/main-logo.png" width="170">
+  <img src="https://cdn.miloszgilga.pl/digititles-imagine-project-logo.png" width="170">
   <br>
 </h1>
 <p align="center" style="font-size: 1.2rem;">
