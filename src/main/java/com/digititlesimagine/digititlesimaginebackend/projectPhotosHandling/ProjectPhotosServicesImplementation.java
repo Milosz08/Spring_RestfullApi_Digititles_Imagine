@@ -76,7 +76,8 @@ public class ProjectPhotosServicesImplementation implements ProjectPhotosService
             Stream<Path> allPaths = Files.walk(dir, 2).filter(path -> !path.equals(dir)).map(dir::relativize);
             fileInfos = allPaths.map(path -> {
                 String name = path.getFileName().toString();
-                String baseUrl = ServletUriComponentsBuilder.fromRequestUri(request).replacePath(null).build().toUriString();
+                String baseUrl = ServletUriComponentsBuilder.fromRequestUri(request).replacePath(null).build()
+                        .toUriString().replaceFirst("http", "https");
                 String uri = baseUrl + FILE_PATH + projectId + FILE_SEPARATOR + path.getFileName();
                 return new ProjectPhotosInfoResponseModel(name, uri);
             }).collect(Collectors.toList());
