@@ -97,7 +97,7 @@ public class ProjectPhotosServicesImplementation implements ProjectPhotosService
         try {
             Stream<Path> onlyIds = Files.walk(dir, 2)
                     .filter(path -> !path.equals(dir)).map(dir::relativize)
-                    .filter(path -> !path.toString().contains(File.separator));
+                    .filter(path -> !path.toString().contains(FILE_SEPARATOR));
             onlyIds.forEach(projectId -> allProjectsImages.add(getAllProjectImages(projectId.toString(), request)));
         } catch (IOException e) {
             throw new ApiRequestException("Could not load the files", HttpStatus.EXPECTATION_FAILED);
@@ -127,7 +127,7 @@ public class ProjectPhotosServicesImplementation implements ProjectPhotosService
         Path dirPath = init(id);
         List<String> fileNames = new ArrayList<>();
         Optional<ProjectModel> findingProject = projectRepository.findProjectModelById(id);
-        if (!findingProject.isPresent()) {
+        if (findingProject.isEmpty()) {
             throw new ApiRequestException("Project with id: '" + id + "' not exist", HttpStatus.NOT_FOUND);
         }
         try {
