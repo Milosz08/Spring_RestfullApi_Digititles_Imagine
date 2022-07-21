@@ -35,17 +35,19 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.servlet.http.HttpServletRequest;
 
 import java.io.*;
-import java.net.MalformedURLException;
-import java.nio.file.*;
 import java.util.*;
-import java.util.stream.Collectors;
+import java.nio.file.*;
 import java.util.stream.Stream;
+import java.util.stream.Collectors;
+import java.net.MalformedURLException;
+
+import static com.digititlesimagine.digititlesimaginebackend.utils.FileManagement.FILE_SEPARATOR;
+import static com.digititlesimagine.digititlesimaginebackend.utils.FileManagement.getImagesFolderPath;
 
 @Service
 public class ProjectPhotosServicesImplementation implements ProjectPhotosServices {
 
-    private static final String UPLOAD_FOLDER = "java-uploads/";
-    private static final String UPLOAD_DIR = System.getProperty("user.dir") + "/src/main/media/" + UPLOAD_FOLDER;
+    private static final String FILE_PATH = "/digititles-imagine-backend/javabean/app/photos/java-upload/";
     private static final List<String> IMG_TYPES = Arrays.asList("image/png", "image/jpeg");
 
     private final ProjectRepository projectRepository;
@@ -56,7 +58,7 @@ public class ProjectPhotosServicesImplementation implements ProjectPhotosService
 
     @Override
     public Path init(String projectId) {
-        File createDir = new File(UPLOAD_DIR + File.separator + projectId);
+        File createDir = new File(getImagesFolderPath() + FILE_SEPARATOR + projectId);
         if (!createDir.exists()) {
             if (!createDir.mkdir()) {
                 throw new ApiRequestException("Could not initialize folder for upload", HttpStatus.EXPECTATION_FAILED);
@@ -68,14 +70,14 @@ public class ProjectPhotosServicesImplementation implements ProjectPhotosService
     @Override
     public Map<String, Object> getAllProjectImages(String projectId, HttpServletRequest request) {
         Map<String, Object> outBody = new HashMap<>();
-        Path dir = new File(UPLOAD_DIR + File.separator + projectId).toPath();
+        Path dir = new File(getImagesFolderPath() + FILE_SEPARATOR + projectId).toPath();
         List<ProjectPhotosInfoResponseModel> fileInfos;
         try {
             Stream<Path> allPaths = Files.walk(dir, 2).filter(path -> !path.equals(dir)).map(dir::relativize);
             fileInfos = allPaths.map(path -> {
                 String name = path.getFileName().toString();
                 String baseUrl = ServletUriComponentsBuilder.fromRequestUri(request).replacePath(null).build().toUriString();
-                String uri = baseUrl + "/" + UPLOAD_FOLDER + projectId + "/" + path.getFileName();
+                String uri = baseUrl + FILE_PATH + projectId + FILE_SEPARATOR + path.getFileName();
                 return new ProjectPhotosInfoResponseModel(name, uri);
             }).collect(Collectors.toList());
         } catch (IOException e) {
@@ -91,7 +93,7 @@ public class ProjectPhotosServicesImplementation implements ProjectPhotosService
     @Override
     public List<Map<String, Object>> getAllImagesFromAllProjects(HttpServletRequest request) {
         List<Map<String, Object>> allProjectsImages = new LinkedList<>();
-        Path dir = new File(UPLOAD_DIR).toPath();
+        Path dir = new File(getImagesFolderPath()).toPath();
         try {
             Stream<Path> onlyIds = Files.walk(dir, 2)
                     .filter(path -> !path.equals(dir)).map(dir::relativize)
@@ -106,7 +108,7 @@ public class ProjectPhotosServicesImplementation implements ProjectPhotosService
     @Override
     public Resource getImage(String projectId, String fileName) {
         try {
-            Path file = new File(UPLOAD_DIR + File.separator + projectId).toPath().resolve(fileName);
+            Path file = new File(getImagesFolderPath() + FILE_SEPARATOR + projectId).toPath().resolve(fileName);
             Resource resource = new UrlResource(file.toUri());
             if (!resource.exists() || !resource.isReadable()) {
                 throw new ApiRequestException(
@@ -154,19 +156,19 @@ public class ProjectPhotosServicesImplementation implements ProjectPhotosService
 
     @Override
     public void deleteImagesFromSingleProject(String projectId) {
-        Path dir = new File(UPLOAD_DIR + File.separator + projectId).toPath();
+        Path dir = new File(getImagesFolderPath() + FILE_SEPARATOR + projectId).toPath();
         FileSystemUtils.deleteRecursively(dir.toFile());
     }
 
     @Override
     public void deleteImagesFromAllProjects() {
-        Path dir = new File(UPLOAD_DIR).toPath();
+        Path dir = new File(getImagesFolderPath()).toPath();
         try {
             Stream<Path> onlyIds = Files.walk(dir, 2)
                     .filter(path -> !path.equals(dir)).map(dir::relativize)
                     .filter(path -> !path.toString().contains(File.separator));
             onlyIds.forEach(projectId -> {
-                Path dirId = new File(UPLOAD_DIR + File.separator + projectId).toPath();
+                Path dirId = new File(getImagesFolderPath() + FILE_SEPARATOR + projectId).toPath();
                 FileSystemUtils.deleteRecursively(dirId.toFile());
             });
         } catch (IOException e) {
