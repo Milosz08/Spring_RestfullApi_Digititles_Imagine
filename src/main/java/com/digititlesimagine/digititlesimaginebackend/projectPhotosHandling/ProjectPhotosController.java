@@ -21,15 +21,21 @@ package com.digititlesimagine.digititlesimaginebackend.projectPhotosHandling;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
 import java.util.List;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import javax.servlet.http.HttpServletRequest;
 
 import static com.digititlesimagine.digititlesimaginebackend.configurer.ServletConfigurer.*;
+import static com.digititlesimagine.digititlesimaginebackend.utils.FileManagement.FILE_SEPARATOR;
+import static com.digititlesimagine.digititlesimaginebackend.utils.FileManagement.getImagesFolderPath;
 
 @RestController
 @RequestMapping(APP_PREFIX + PHOTOS)
@@ -60,6 +66,11 @@ public class ProjectPhotosController {
         return ResponseEntity.ok()
             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
             .body(file);
+    }
+
+    @GetMapping(value = "/java-upload/{projectId}/{filename}", produces = MediaType.IMAGE_PNG_VALUE)
+    public byte[] download(@PathVariable String projectId, @PathVariable String filename) throws IOException {
+        return Files.readAllBytes(Paths.get(getImagesFolderPath() + projectId + FILE_SEPARATOR + filename));
     }
 
     @PostMapping(value = "/upload/{projectId}", consumes = { "multipart/form-data" })
